@@ -106,7 +106,11 @@ fi
 
 
 # finished & reboot
+echo ""
+echo ""
+echo "#############################"
 echo "Restarting in 5seconds"
+echo ""
 echo "New hostname is pi-auto4"
 sleep 5
 sudo reboot
