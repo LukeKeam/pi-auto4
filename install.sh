@@ -75,7 +75,7 @@ sudo apt-get install busybox-syslogd -y
 sudo rm /var/lib/systemd/random-seed &&
 sudo ln -s /tmp/random-seed /var/lib/systemd/random-seed
 # edit random seed service
-sed '/^RemainAfterExit=.*/a ExecStartPre=/bin/echo' systemd-random-seed.service
+sed '/^RemainAfterExit=.*/a ExecStartPre=/bin/echo' /lib/systemd/system/systemd-random-seed.service
 
 
 echo "Update UART "
