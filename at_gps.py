@@ -21,7 +21,8 @@ def obd_data_thread(utc, obd_connection):
     t = threading.Thread(target=obd_data, args=(utc, obd_connection))
     t.start()
 
-# ser
+
+
 ser = serial.Serial('/dev/ttyUSB1', 115200)
 
 
