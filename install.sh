@@ -1,9 +1,15 @@
 #!/bin/bash
+: '
+have installed and working os, you will not need a gui!
+Raspberry Pi OS Lite 32bit os https://www.raspberrypi.com/software/operating-systems/
+once have ssh connection to pi
+curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo bash ./install.sh
+'
+
+# intro
 echo "Thanks for choosing pi-auto4 from https://fleet-track.org"
-# have installed and working os, you will not need a gui!
-# Raspberry Pi OS Lite 32bit os https://www.raspberrypi.com/software/operating-systems/
-# curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo bash ./install.sh
-# once have ssh connection to pi
+echo "This is in testing continue at own risk, press ENTER to continue or CTRL+C to exit"
+read testing
 
 # update
 sudo apt-get update
