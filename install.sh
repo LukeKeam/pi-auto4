@@ -7,8 +7,13 @@ curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh 
 '
 
 # intro
+echo ""
+echo ""
+echo ""
+echo ""
 echo "Thanks for choosing pi-auto4 from https://fleet-track.org"
-echo "This is in testing continue at own risk, press ENTER to continue or CTRL+C to exit"
+echo ""
+echo "This is in testing continue at own risk, press ENTER to continue or ctrl+c to exit"
 read testing
 
 # update
