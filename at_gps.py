@@ -22,7 +22,7 @@ def obd_data_thread(utc, obd_connection):
     t.start()
 
 
-
+# have ser here?
 ser = serial.Serial('/dev/ttyUSB1', 115200)
 
 
