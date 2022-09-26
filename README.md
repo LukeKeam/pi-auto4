@@ -11,4 +11,4 @@ https://www.waveshare.com/wiki/SIM7600E-H_4G_HAT
 Added sample variables.py file
 
 # install
- curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo sh ./install.sh
+ curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo bash ./install.sh

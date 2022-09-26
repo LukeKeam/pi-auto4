@@ -2,7 +2,7 @@
 echo "Thanks for choosing pi-auto4 from https://fleet-track.org"
 # have installed and working os, you will not need a gui!
 # Raspberry Pi OS Lite 32bit os https://www.raspberrypi.com/software/operating-systems/
-# curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo sh ./install.sh
+# curl -LJO https://raw.githubusercontent.com/LukeKeam/pi-auto4/master/install.sh && sudo bash ./install.sh
 # once have ssh connection to pi
 
 # update
