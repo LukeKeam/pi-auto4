@@ -6,6 +6,8 @@ sudo systemctl status pi-auto4.service
 sudo systemctl stop pi-auto4.service
 sudo systemctl start pi-auto4.service
 """
+
+
 import datetime
 import time
 
@@ -186,17 +188,24 @@ def update_datetime_thread():
 
 
 ###################################################
+# Post to Server Thread
+###################################################
+def post_to_server_thread():
+    t = threading.Thread(target=post_to_server(conn=conn, token=token, auth_user_id=auth_user_id), args=())
+    t.start()
+
+
+###################################################
 # Main
 ###################################################
 if __name__ == '__main__':
     temp_start()
     ser = serial.Serial(variables.serial_connection, 115200)
     # gps_start(ser)  # needed?
-    gps_start_app(ser, obd_connection)
     internet_start_pon_thread()
     # ser = serial.Serial(variables.serial_connection, 9600)
-    time.sleep(15)  # testing bonus time for letting the app/pi start
-    update_check()
+    time.sleep(10)  # testing bonus time for letting the app/pi start
     update_datetime_thread()
-    post_to_server(conn=conn, token=token, auth_user_id=auth_user_id)
-
+    update_check()
+    post_to_server_thread()
+    gps_start_app(ser, obd_connection)

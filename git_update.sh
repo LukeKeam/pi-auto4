@@ -19,6 +19,8 @@ elif [ $LOCAL = $BASE ]; then
     git pull
     # restore variables
     git stash pop
+    # restart service?
+    # or just have it restart next time? depends on if it has updates to do
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
 else
