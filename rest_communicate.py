@@ -3,6 +3,7 @@ import time
 import requests
 from dateutil import parser
 from db_connect import db_create_connection
+import variables
 
 
 # https://requests.readthedocs.io/en/master/
@@ -35,7 +36,7 @@ def post_to_server(auth_user_id, token, conn):
         cur = conn.cursor()
         def send(row, auth_user_id):
             # print('Send record start')
-            user_id = "Polo"
+            user_id = variables.device_id
             auth_user = "1"
             utc = row[1]
             u = int(float(utc))

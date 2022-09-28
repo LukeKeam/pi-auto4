@@ -1,3 +1,11 @@
+"""
+
+# systemctl commands
+sudo systemctl restart pi-auto4.service
+sudo systemctl status pi-auto4.service
+sudo systemctl stop pi-auto4.service
+sudo systemctl start pi-auto4.service
+"""
 import datetime
 import time
 
