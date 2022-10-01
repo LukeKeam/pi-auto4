@@ -70,23 +70,52 @@ WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-auto4.service # need to make other lines ro
 sudo systemctl enable pi-auto4.service
 
+
 echo "Making OS read only"
 # https://hallard.me/raspberry-pi-read-only/
+# remove stuff
+sudo apt-get remove --purge triggerhappy logrotate dphys-swapfile -y
+# sudo apt-get autoremove --purge -y  # this needed?
+# sys log
+sudo apt-get install busybox-syslogd -y
+sudo dpkg --purge rsyslog
+
+# sudo nano /boot/cmdline.txt # add fastboot noswap ro
+echo "fastboot noswap ro" | sudo tee -a /boot/cmdline.txt # not on the same line though
+
+# Move some system files to temp filesystem
+sudo rm -rf /var/lib/dhcp/ /var/lib/dhcpcd5 /var/run /var/spool /var/lock /etc/resolv.conf
+sudo ln -s /tmp /var/lib/dhcp
+sudo ln -s /tmp /var/lib/dhcpcd5
+sudo ln -s /tmp /var/run
+sudo ln -s /tmp /var/spool
+sudo ln -s /tmp /var/lock
+sudo touch /tmp/dhcpcd.resolv.conf
+sudo ln -s /tmp/dhcpcd.resolv.conf /etc/resolv.conf
+
+# move random-seed
+sudo rm /var/lib/systemd/random-seed &&
+sudo ln -s /tmp/random-seed /var/lib/systemd/random-seed
+# edit random seed service
+sudo sed '/^RemainAfterExit=.*/a ExecStartPre=/bin/echo "" >/tmp/random-seed' /lib/systemd/system/systemd-random-seed.service
+
+# reload systemctl
+sudo systemctl daemon-reload
+
+# Setup the Internet clock sync
+sudo apt-get install ntp -y
+
+# remove startup scripts
+sudo insserv -r bootlogs
+sudo insserv -r console-setup
+
+
 # make os read only
 append_line="/home/pi/pi-auto4     /pi-auto4        ext4    defaults,bind,rw     0       0
 tmpfs        /tmp            tmpfs   nosuid,nodev         0       0
 tmpfs        /var/log        tmpfs   nosuid,nodev         0       0
 tmpfs        /var/tmp        tmpfs   nosuid,nodev         0       0"
 echo "$append_line" | sudo tee -a /etc/fstab # need to make other lines ro
-sudo apt-get remove --purge triggerhappy logrotate dphys-swapfile -y
-# sudo apt-get autoremove --purge -y  # this needed?
-# sudo nano /boot/cmdline.txt # add fastboot noswap ro
-echo "fastboot noswap ro" | sudo tee -a /boot/cmdline.txt # not on the same line though
-sudo apt-get install busybox-syslogd -y
-sudo rm /var/lib/systemd/random-seed &&
-sudo ln -s /tmp/random-seed /var/lib/systemd/random-seed
-# edit random seed service
-sed '/^RemainAfterExit=.*/a ExecStartPre=/bin/echo' /lib/systemd/system/systemd-random-seed.service
 
 
 echo "Update UART "
@@ -94,23 +123,6 @@ echo "Update UART "
 append_line="enable_uart=1"
 echo "$append_line" | sudo tee -a /boot/config.txt
 
-
-: '
-This Needed? as it updaes time on every start? and gets time off gps
-
-# time cronjob
-# /etc/cron.hourly/fake-hwclock
-#!/bin/sh
-#
-# Simple cron script - save the current clock periodically in case of
-# a power failure or other crash
-
-if (command -v fake-hwclock >/dev/null 2>&1) ; then
-  mount -o remount,rw /
-  fake-hwclock save
-  mount -o remount,ro /
-fi
-'
 
 # add bluetooth device
 # manual process

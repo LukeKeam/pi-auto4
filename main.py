@@ -1,4 +1,7 @@
 """
+# mount file system
+sudo mount -o remount,ro /
+sudo mount -o remount,rw /
 
 # systemctl commands
 sudo systemctl restart pi-auto4.service
