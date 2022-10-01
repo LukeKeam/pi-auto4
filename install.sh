@@ -125,7 +125,8 @@ echo "$append_line" | sudo tee -a /boot/config.txt
 
 
 # add bluetooth device
-# manual process
+echo ""
+echo "Bluetooth device can be added to variables.py"
 
 
 # finished & reboot
