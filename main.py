@@ -2,6 +2,9 @@
 # mount file system
 sudo mount -o remount,ro /
 sudo mount -o remount,rw /
+sudo mount --bind /home/pi/pi-auto4 /pi-auto4 -o --rw
+sudo mount /pi-auto4 /home/pi/pi-auto4 -o bind,rw
+
 
 # systemctl commands
 sudo systemctl restart pi-auto4.service
