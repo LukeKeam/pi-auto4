@@ -207,6 +207,7 @@ def post_to_server_thread():
 if __name__ == '__main__':
     temp_start()
     ser = serial.Serial(variables.serial_connection, 115200)
+    at_command('AT+CGPSAUTO=1')  # gps set to auto start
     # gps_start(ser)  # needed?
     internet_start_pon_thread()
     # ser = serial.Serial(variables.serial_connection, 9600)

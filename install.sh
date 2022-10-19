@@ -62,7 +62,7 @@ After=multi-user.target
 [Service]
 Type=idle
 WorkingDirectory=/pi-auto4
-ExecStart=/bin/bash -c "/pi-auto4 && python3 /pi-auto4/main.py"
+ExecStart=/bin/bash -c "python3 /pi-auto4/main.py"
 
 [Install]
 WantedBy=multi-user.target'
@@ -70,6 +70,9 @@ WantedBy=multi-user.target'
 
 echo "$append_line" | sudo tee /lib/systemd/system/pi-auto4.service # need to make other lines ro
 sudo systemctl enable pi-auto4.service
+
+echo "poops out here"
+read experimental
 
 
 echo "Making OS read only"
@@ -106,13 +109,6 @@ sudo sed '/^RemainAfterExit=.*/a ExecStartPre=/bin/echo "" >/tmp/random-seed' /l
 # reload systemctl
 sudo systemctl daemon-reload
 
-# Setup the Internet clock sync
-sudo apt-get install ntp -y
-
-# remove startup scripts
-sudo systemctl disable bootlogs
-sudo systemctl disable console-setup
-
 
 # make os read only maybe a sed like above
 # /home/pi/pi-auto     /pi-auto        ext4    defaults,bind,rw     0       0
@@ -120,6 +116,14 @@ append_line="tmpfs        /tmp            tmpfs   nosuid,nodev         0       0
 tmpfs        /var/log        tmpfs   nosuid,nodev         0       0
 tmpfs        /var/tmp        tmpfs   nosuid,nodev         0       0"
 echo "$append_line" | sudo tee -a /etc/fstab # need to make other lines ro
+
+
+# remove startup scripts
+sudo systemctl disable bootlogs
+sudo systemctl disable console-setup
+
+
+
 
 
 echo "Update UART "
