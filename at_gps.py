@@ -1,3 +1,8 @@
+"""
+gps
+
+"""
+
 import datetime
 import time
 
@@ -23,7 +28,7 @@ def obd_data_thread(utc, obd_connection):
 
 
 # have ser here?
-ser = serial.Serial('/dev/ttyUSB2', 115200)
+ser = serial.Serial('/dev/ttyUSB1', 115200)
 
 
 # namea output stream
@@ -47,7 +52,6 @@ def at_get_gps_position(ser, obd_connection):
     obd_connection_bool_false_counter = 0
     obd_connection_bool = False
     i = 0
-    ser = serial.Serial('/dev/ttyUSB2', 115200)
     while gps_start:
         line = serial.Serial.readline(ser)
         GPRMC_test = str(line).startswith("b'$GPRMC")
@@ -196,10 +200,3 @@ def at_get_gps_position(ser, obd_connection):
             except:
                 print('except')
 
-
-"""
-import obd
-obd_connection = obd.OBD(portstr='/dev/rfcomm0', baudrate='115200', protocol='6')
-at_get_gps_position(ser, obd)
-
-"""

@@ -123,8 +123,8 @@ sudo systemctl disable bootlogs
 sudo systemctl disable console-setup
 
 
-
-
+read "May need to check what device eg /dev/ttyUSB1 is outputting NMEA data"
+read "need to go to rapid-config > interface > no then yes"
 
 echo "Update UART "
 # add line to config enable uart # # raspi-config for serial???
