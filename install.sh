@@ -71,7 +71,10 @@ WantedBy=multi-user.target'
 echo "$append_line" | sudo tee /lib/systemd/system/pi-auto4.service # need to make other lines ro
 sudo systemctl enable pi-auto4.service
 
+
+################################################################################################
 echo "poops out here"
+################################################################################################
 read experimental
 
 
