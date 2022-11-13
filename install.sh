@@ -73,9 +73,11 @@ sudo systemctl enable pi-auto4.service
 
 
 ################################################################################################
-echo "poops out here"
+echo "poops out here and in testing/dev"
 ################################################################################################
 read experimental
+echo "setup internet"
+# edit sudo nano /etc/ppp/peers/provider
 
 
 echo "Making OS read only"

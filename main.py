@@ -215,5 +215,5 @@ if __name__ == '__main__':
     update_datetime_thread()
     update_check()
     post_to_server_thread()
-    ser = serial.Serial('/dev/ttyUSB1', 115200)
-    gps_start_app(ser, obd_connection)
+    ser_gps = serial.Serial(variables.gps_device, 115200)
+    gps_start_app(ser_gps, obd_connection)
