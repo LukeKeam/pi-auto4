@@ -211,9 +211,9 @@ if __name__ == '__main__':
     # gps_start(ser)  # needed?
     internet_start_pon_thread()
     # ser = serial.Serial(variables.serial_connection, 9600)
-    time.sleep(10)  # testing bonus time for letting the app/pi start
     update_datetime_thread()
     update_check()
     post_to_server_thread()
+    time.sleep(30)  # testing bonus time for letting the app/pi start
     ser_gps = serial.Serial(variables.gps_device, 115200)
     gps_start_app(ser_gps, obd_connection)
