@@ -28,7 +28,7 @@ def obd_data_thread(utc, obd_connection):
 
 
 # have ser here?
-ser = serial.Serial('/dev/ttyUSB1', 115200)
+# ser = serial.Serial('/dev/ttyUSB1', 115200)
 
 
 # namea output stream

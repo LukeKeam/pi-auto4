@@ -4,6 +4,11 @@
 # check for current version
 git remote update
 
+# force
+# git fetch
+# git reset --hard master
+# git merge '@{u}'
+
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
