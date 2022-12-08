@@ -93,8 +93,8 @@ def at_command(at_command):
 def gps_start(ser):
     at_gps_start(ser)
 
-def gps_start_app(ser, obd_connection):
-    at_get_gps_position(ser, obd_connection)
+def gps_start_app(ser, obd_connection, conn, token, auth_user_id):
+    at_get_gps_position(ser, obd_connection, conn, token, auth_user_id)
 
 def gps_stop(ser):
     at_gps_stop(ser)
