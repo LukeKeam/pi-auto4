@@ -4,6 +4,7 @@ import requests
 from dateutil import parser
 from db_connect import db_create_connection
 import variables
+import threading
 
 
 # https://requests.readthedocs.io/en/master/
@@ -106,3 +107,10 @@ def post_to_server(auth_user_id, token, conn):
     except Exception as e:
         print('post_to_server except', e)
 
+
+###################################################
+# Post to Server Thread
+###################################################
+def post_to_server_thread(auth_user_id, token, conn):
+    t = threading.Thread(target=post_to_server(conn=conn, token=token, auth_user_id=auth_user_id), args=())
+    t.start()

@@ -31,7 +31,7 @@ from at_gps import at_get_gps_position
 from db_connect import db_create_connection
 from gpio import gpio_power_on, gpio_power_off
 from log_write_to_text_file import log_write_to_text_file
-from rest_communicate import post_to_server
+from rest_communicate import post_to_server_thread
 from temp_mon import *
 
 # user vars
@@ -194,14 +194,6 @@ def update_datetime_thread():
 
 
 ###################################################
-# Post to Server Thread
-###################################################
-def post_to_server_thread():
-    t = threading.Thread(target=post_to_server(conn=conn, token=token, auth_user_id=auth_user_id), args=())
-    t.start()
-
-
-###################################################
 # Main
 ###################################################
 if __name__ == '__main__':
@@ -213,7 +205,7 @@ if __name__ == '__main__':
     # ser = serial.Serial(variables.serial_connection, 9600)
     update_datetime_thread()
     update_check()
-    post_to_server_thread()
+    post_to_server_thread(conn=conn, token=token, auth_user_id=auth_user_id)
     time.sleep(30)  # testing bonus time for letting the app/pi start
     ser_gps = serial.Serial(variables.gps_device, 115200)
-    gps_start_app(ser_gps, obd_connection)
+    gps_start_app(ser_gps, obd_connection, conn=conn, token=token, auth_user_id=auth_user_id)

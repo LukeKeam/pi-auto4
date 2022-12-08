@@ -1,6 +1,5 @@
 """
 gps
-
 """
 
 import datetime
@@ -13,6 +12,7 @@ import threading
 from at_connections import at_gps_stop, at_gps_start, at_internet_start, at_internet_stop, at_test_device_connection
 from gpio import gpio_power_on, gpio_power_off
 from bluetooth_connect import obd_data, obd_connection_test
+from rest_communicate import post_to_server_thread
 
 
 # add to db via thread, otherwise screws up time
@@ -27,12 +27,8 @@ def obd_data_thread(utc, obd_connection):
     t.start()
 
 
-# have ser here?
-# ser = serial.Serial('/dev/ttyUSB1', 115200)
-
-
 # namea output stream
-def at_get_gps_position(ser, obd_connection):
+def at_get_gps_position(ser, obd_connection, auth_user_id, token, conn):
     gps_start = True
     print('Start GPS session...')
     date_now = datetime.datetime.now()
@@ -181,8 +177,9 @@ def at_get_gps_position(ser, obd_connection):
                 print('int send data:', i)
                 if i == 100:
                     print('100')
-                if i >= 101:
-                    print('101')
+                if i >= 420:
+                    print('420: send data')
+                    post_to_server_thread(conn=conn, token=token, auth_user_id=auth_user_id)
                     i = 0
             # run bluetooth here, every second
             try:
