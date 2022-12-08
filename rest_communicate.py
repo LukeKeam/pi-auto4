@@ -114,3 +114,4 @@ def post_to_server(auth_user_id, token, conn):
 def post_to_server_thread(auth_user_id, token, conn):
     t = threading.Thread(target=post_to_server(conn=conn, token=token, auth_user_id=auth_user_id), args=())
     t.start()
+

@@ -208,4 +208,4 @@ if __name__ == '__main__':
     post_to_server_thread(conn=conn, token=token, auth_user_id=auth_user_id)
     time.sleep(30)  # testing bonus time for letting the app/pi start
     ser_gps = serial.Serial(variables.gps_device, 115200)
-    gps_start_app(ser_gps, obd_connection, conn=conn, token=token, auth_user_id=auth_user_id)
+    gps_start_app(ser_gps, obd_connection, conn, token, auth_user_id)
